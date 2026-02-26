@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    karateVersion = '1.4.1'
+    junitVersion  = '5.10.2'
+    junitPlatform = '1.10.2'
+}
+
+dependencies {
+    testImplementation "com.intuit.karate:karate-junit5:${karateVersion}"
+
+    // JUnit 5 (engine)
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+
+    // ✅ Esto arregla el “Failed to load JUnit Platform”
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatform}"
+
+    testImplementation "ch.qos.logback:logback-classic:1.5.6"
+}
+
+test {
+    useJUnitPlatform()
+
+}
