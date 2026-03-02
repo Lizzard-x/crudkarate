@@ -7,11 +7,11 @@ pipeline {
   }
 
   environment {
-
-    GRADLE_USER_HOME = "${WORKSPACE}/.gradle"
+    GRADLE_USER_HOME = "${WORKSPACE}\\.gradle"
   }
 
   stages {
+
     stage('Checkout') {
       steps {
         checkout scm
@@ -19,19 +19,20 @@ pipeline {
     }
 
     stage('Build & Test (Karate)') {
-        steps {
-            bat 'gradlew.bat clean test --no-daemon'
-        }
-    }
+      steps {
+        bat 'gradlew.bat clean test --no-daemon'
+      }
+
       post {
         always {
-          // JUnit results (ajusta si tu runner genera otro path)
+          // Resultados JUnit
           junit allowEmptyResults: true, testResults: '**/build/test-results/test/*.xml'
 
-          // Guarda reportes / logs como artefactos
-          archiveArtifacts allowEmptyArchive: true, artifacts: '**/build/reports/**, **/build/karate-reports/**, **/build/surefire-reports/**'
+          // Artefactos (reportes / logs)
+          archiveArtifacts allowEmptyArchive: true,
+            artifacts: '**/build/reports/**, **/build/karate-reports/**, **/build/test-results/**'
 
-          // Publica HTML (Karate normalmente genera HTML en build/karate-reports)
+          // Reporte HTML Karate (si existe)
           publishHTML(target: [
             allowMissing: true,
             alwaysLinkToLastBuild: true,
@@ -47,7 +48,7 @@ pipeline {
 
   post {
     success { echo '✅ Pipeline OK' }
-    failure { echo '❌ Pipeline falló (mira el stage de Test y el reporte HTML)' }
+    failure { echo '❌ Pipeline falló (revisa Console Output y Test Results)' }
     cleanup {
       cleanWs(deleteDirs: true, disableDeferredWipeout: true)
     }
