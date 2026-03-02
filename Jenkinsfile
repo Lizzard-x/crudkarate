@@ -19,14 +19,10 @@ pipeline {
     }
 
     stage('Build & Test (Karate)') {
-      steps {
-        // Recomendado en Linux
-        sh '''
-          chmod +x gradlew || true
-          ./gradlew clean test --no-daemon
-        '''
-
-      }
+        steps {
+            bat 'gradlew.bat clean test --no-daemon'
+        }
+    }
       post {
         always {
           // JUnit results (ajusta si tu runner genera otro path)
