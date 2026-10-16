@@ -5,15 +5,7 @@ Suite de pruebas automatizadas para un **CRUD** (Crear, Leer, Actualizar y Elimi
 ## Tabla de contenidos
 
 - [Descripción](#descripción)
-- [Tecnologías](#tecnologías)
-- [Requisitos previos](#requisitos-previos)
-- [Estructura del proyecto](#estructura-del-proyecto)
-- [Configuración](#configuración)
-- [Ejecución de las pruebas](#ejecución-de-las-pruebas)
-- [Casos de prueba](#casos-de-prueba)
-- [Reportes](#reportes)
-- [Buenas prácticas aplicadas](#buenas-prácticas-aplicadas)
-- [Autor](#autor)
+
 
 ## Descripción
 
